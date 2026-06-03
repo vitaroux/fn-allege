@@ -1,8 +1,8 @@
 import { processWorkbook, downloadWorkbook } from './processor.js'
 
-export function initApp(root) {
+export function initApp(root, logoutFn, reboot) {
   root.innerHTML = `
-    <div class="header">
+    <div class="header-top-row">
       <div class="header-top">
         <div class="header-icon">FN</div>
         <div>
@@ -10,6 +10,7 @@ export function initApp(root) {
           <p>Normalisation de fiches navette topologie Free / Orange</p>
         </div>
       </div>
+      <button id="logout-btn" class="logout-btn">Déconnexion</button>
     </div>
 
     <div id="drop-zone" class="drop-zone">
@@ -59,6 +60,11 @@ export function initApp(root) {
   let outputWb       = null
   let outputFilename = ''
 
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    logoutFn()
+    reboot()
+  })
+
   function showStatus(msg, type) {
     statusEl.textContent = msg
     statusEl.className   = 'status ' + type
@@ -95,7 +101,7 @@ export function initApp(root) {
   }
 
   dropZone.addEventListener('click',     () => fileInput.click())
-  dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('over') })
+  dropZone.addEventListener('dragover',  e  => { e.preventDefault(); dropZone.classList.add('over') })
   dropZone.addEventListener('dragleave', ()  => dropZone.classList.remove('over'))
   dropZone.addEventListener('drop', e => {
     e.preventDefault()
