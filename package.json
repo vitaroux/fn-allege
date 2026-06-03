@@ -1,0 +1,16 @@
+{
+  "name": "fn-allege",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
